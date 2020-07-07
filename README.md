@@ -1,1 +1,1 @@
-# react-aws
+# react projects root
