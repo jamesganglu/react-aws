@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import {connect} from 'react-redux';
 import {getPosts} from '../actions/index';
-import { RESOURCES } from '../config';
+import { resources } from '../config';
 
 class List extends React.Component {
 
@@ -12,7 +12,6 @@ class List extends React.Component {
 
 	gotoPost = (id,e) => {
 		e.preventDefault();
-		console.log(this.props.history);
 		this.props.history.push({
 			pathname:`/post/${id}`
 		});
@@ -22,7 +21,7 @@ class List extends React.Component {
 		const lis = this.props.posts && this.props.posts.map(post=>{
 			return (
 				<li key={post.id}>
-					<a href={RESOURCES.POST_URL+'/'+post.id} onClick={(e)=>this.gotoPost(post.id,e)}>{post.title}</a>
+					<a href={resources.POST_URL+'/'+post.id} onClick={(e)=>this.gotoPost(post.id,e)}>{post.title}</a>
 				</li>
 			)
 		})

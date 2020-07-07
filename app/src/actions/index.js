@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RESOURCES } from '../config';
+import { resources } from '../config';
 
 export const toggleLogin = (isLogin)=>{
   return {
@@ -9,7 +9,7 @@ export const toggleLogin = (isLogin)=>{
 }
 
 export const getPosts = () => dispatch => {
-  axios.get(RESOURCES.POST_URL).then(
+  axios.get(resources.POST_URL).then(
     res=>{
       dispatch({
         type: 'posts',
@@ -20,7 +20,7 @@ export const getPosts = () => dispatch => {
 }
 
 export const getSelectedPost = (id) => dispatch => {
-  axios.get(`${RESOURCES.POST_URL}/${id}`).then(
+  axios.get(`${resources.POST_URL}/${id}`).then(
     res=>{
        dispatch({
         type: 'selectedPost',
