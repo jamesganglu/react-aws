@@ -11,6 +11,15 @@ import { aws } from './config';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+Amplify.configure({
+	Auth:{
+		mandatorySignId:true,
+		region:aws.cognito.REGION,
+		userPoolId:aws.cognito.USER_POOL_ID,
+		userPoolWebClientId:aws.cognito.APP_CLIENT_ID
+	}
+})
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 ReactDOM.render(
   <React.StrictMode>

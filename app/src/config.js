@@ -6,9 +6,8 @@ export const resources = {
 
 export const aws = {
 	cognito:{
-    	'REGION':'',
-    	'USER_POOL_ID':'',
-    	'APP_CLIENT_ID':''
-
+    	'REGION':'us-east-1',
+    	'USER_POOL_ID':'us-west-2_JP28uzgwS',
+    	'APP_CLIENT_ID':'54mn2ffo0i91d2pqmvub7iirij'
     }
 }
