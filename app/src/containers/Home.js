@@ -4,6 +4,7 @@ import {getPosts} from '../actions/index';
 
 class Home extends React.Component {
 
+
   render(){
 		return (
 			<Fragment>
