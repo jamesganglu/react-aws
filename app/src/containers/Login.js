@@ -3,23 +3,42 @@ import {connect} from 'react-redux';
 import {getPosts} from '../actions/index';
 
 class Home extends React.Component {
+	state={
+		userName:'',
+		password:''
+	}
 
-	onSubmit = data => {
-		console.log(data);
-		return false;
+	onSubmitForm = (e) => {
+		e.preventDefault();
+		console.log(this.state);
 	}
   render(){
 		return (
 			<Fragment>
 				<div className="container">
-					<form onSubmit={this.onSubmit.bind(this)}>
+					<form onSubmit={ this.onSubmitForm }>
 						<div className="form-group">
 							<label htmlFor="InputEmail">Email address</label>
-							<input name="email" type="text" className="form-control" id="InputEmail" />
+							<input name="email" 
+								type="text" 
+								className="form-control" 
+								id="InputEmail" 
+								onChange={e=>{
+									this.setState({userName :e.target.value})
+								}} 
+							/>
 						</div>
 						<div className="form-group">
 							<label htmlFor="InputPassword">Password</label>
-							<input name="password" type="password" className="form-control" id="InputPassword" />
+							<input 
+								name="password" 
+								type="password" 
+								className="form-control" 
+								id="InputPassword" 
+								onChange={e=>{
+									this.setState({password:e.target.value})
+								}}
+							/>
 						</div>
 						<button type="submit" className="btn btn-primary">Submit</button>
 					</form>
