@@ -5,6 +5,7 @@ import {getPosts} from '../actions/index';
 class Home extends React.Component {
 	state={
 		userName:'',
+		email:'',
 		password:''
 	}
 
@@ -13,25 +14,33 @@ class Home extends React.Component {
 		console.log(this.state);
 	}
 
+
 	onInputChange = (e) =>{
 		this.setState({
 			[e.target.id]:e.target.value
 		})
 	} 
-
-
   render(){
 		return (
 			<Fragment>
 				<div className="container">
 					<form onSubmit={ this.onSubmitForm }>
 						<div className="form-group">
-							<label htmlFor="userName">Email address</label>
-							<input name="email" 
+							<label htmlFor="userName">User Name</label>
+							<input name="userName" 
 								type="text" 
 								className="form-control" 
 								id="userName" 
-								onChange={e=>this.onInputChange(e)} 
+								onChange={e=>{this.onInputChange(e)}}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="email">Email address</label>
+							<input name="email" 
+								type="text" 
+								className="form-control" 
+								id="email" 
+								onChange={e=>{this.onInputChange(e)}}
 							/>
 						</div>
 						<div className="form-group">
@@ -41,7 +50,7 @@ class Home extends React.Component {
 								type="password" 
 								className="form-control" 
 								id="password" 
-								onChange={e=>this.onInputChange(e)}
+								onChange={e=>{this.onInputChange(e)}}
 							/>
 							<p>uppercase letters, lowercase letters, special characters, numbers
 							Minimum password length 8</p>

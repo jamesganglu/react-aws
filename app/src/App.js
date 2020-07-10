@@ -13,6 +13,7 @@ import Home from './containers/Home';
 import Articles from './containers/Articles';
 import Article from './containers/Article';
 import Login from './containers/Login';
+import Register from './containers/Register';
 
 Amplify.configure({
   Auth:{
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/posts" component={Articles} />
             <Route exact path="/post/:id" component={Article} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
           </Switch>
         </main>
       </Router>
