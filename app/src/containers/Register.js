@@ -1,20 +1,39 @@
 import React, { Fragment } from 'react';
-import {connect} from 'react-redux';
-import {getPosts} from '../actions/index';
+import { connect } from 'react-redux';
+import { Auth } from 'aws-amplify';
+import ValidaRegister from '../utilities/validators'
 
 class Home extends React.Component {
 	state={
-		userName:'',
+		username:'',
 		email:'',
-		password:''
+		password:'',
+		errors:{
+
+		}
 	}
 
-	onSubmitForm = (e) => {
+	onSubmitForm = async (e) => {
 		e.preventDefault();
-		console.log(this.state);
+		//will do validations
+
+		const {username, password, email} = this.state;
+
+		try{
+			const signUpResponse = await Auth.signUp({
+				username,
+				password,
+				attributes:{
+					email
+				}
+			});
+			console.log(signUpResponse);
+		}catch(err){
+			console.log(err)
+		}
+		
 	}
-
-
+	
 	onInputChange = (e) =>{
 		this.setState({
 			[e.target.id]:e.target.value
@@ -26,11 +45,12 @@ class Home extends React.Component {
 				<div className="container">
 					<form onSubmit={ this.onSubmitForm }>
 						<div className="form-group">
-							<label htmlFor="userName">User Name</label>
-							<input name="userName" 
+							<label htmlFor="username">User Name</label>
+							<input name="userName"
 								type="text" 
+								value={this.state.userName}
 								className="form-control" 
-								id="userName" 
+								id="username" 
 								onChange={e=>{this.onInputChange(e)}}
 							/>
 						</div>
@@ -38,6 +58,7 @@ class Home extends React.Component {
 							<label htmlFor="email">Email address</label>
 							<input name="email" 
 								type="text" 
+								value={this.state.email}
 								className="form-control" 
 								id="email" 
 								onChange={e=>{this.onInputChange(e)}}
@@ -55,6 +76,16 @@ class Home extends React.Component {
 							<p>uppercase letters, lowercase letters, special characters, numbers
 							Minimum password length 8</p>
 						</div>
+						<div className="form-group">
+							<label htmlFor="repassword">Re-enter Password</label>
+							<input 
+								name="repassword" 
+								type="password" 
+								className="form-control" 
+								id="repassword" 
+								onChange={e=>{this.onInputChange(e)}}
+							/>
+						</div>
 						<button type="submit" className="btn btn-primary">Submit</button>
 					</form>
 				</div>
@@ -66,12 +97,10 @@ class Home extends React.Component {
 
 const mapStateTopProps = state => {
 	return {
-		posts : state.resources.posts,
 		message:state.auth
 	}
 }
 const mapDispatchToProps = {
-	getPosts
 }
 
 export default connect(mapStateTopProps, mapDispatchToProps)(Home);
