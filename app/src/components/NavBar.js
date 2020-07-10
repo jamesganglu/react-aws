@@ -8,7 +8,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div className="container">
-          <span className="navbar-brand" href="#">Cognito</span>
+          <span className="navbar-brand" href="#">boilderplate</span>
 
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -23,6 +23,8 @@ class Navbar extends Component {
                 <Link to="/posts" className="nav-link">post list</Link>
               </li>
             </ul>
+
+            <Link to="/login" className="nav-link btn btn-primary">login</Link>
           </div>
         </div>
       </nav>
