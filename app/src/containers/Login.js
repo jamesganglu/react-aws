@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react';
 import {connect} from 'react-redux';
 import {getPosts} from '../actions/index';
+import { Link } from 'react-router-dom';
+
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 class Home extends React.Component {
 	state={
@@ -22,34 +26,55 @@ class Home extends React.Component {
 
   render(){
 		return (
-			<Fragment>
-				<div className="container">
-					<form onSubmit={ this.onSubmitForm }>
-						<div className="form-group">
-							<label htmlFor="userName">Email address</label>
-							<input name="email" 
-								type="text" 
-								className="form-control" 
-								id="userName" 
-								onChange={e=>this.onInputChange(e)} 
-							/>
-						</div>
-						<div className="form-group">
-							<label htmlFor="password">Password</label>
-							<input 
-								name="password" 
-								type="password" 
-								className="form-control" 
-								id="password" 
-								onChange={e=>this.onInputChange(e)}
-							/>
-							<p>uppercase letters, lowercase letters, special characters, numbers
-							Minimum password length 8</p>
-						</div>
-						<button type="submit" className="btn btn-primary">Submit</button>
-					</form>
-				</div>
-			</Fragment>
+		<div className="container">
+			<Formik
+				initialValues= {
+					{
+						username:'',
+						password:''
+					}
+				}
+
+				validationSchema = {
+					Yup.object({
+						username:Yup.string().required('please input user name'),
+						password:Yup.string().required('please enter password')
+					})
+				}
+			>{(formik)=>(
+						<form onSubmit={ this.onSubmitForm }>
+							<div className="form-group">
+								<label htmlFor="username">Username</label>
+								<input
+									ype="text" 
+									className="form-control" 
+									id="username" 
+									{...formik.getFieldProps('username')}
+								/>
+								{formik.touched.username && formik.errors.username && (
+									<div className="text-danger">{formik.errors.username}</div>
+								)}
+							</div>
+							<div className="form-group">
+								<label htmlFor="password">Password</label>
+								<input 
+									type="password" 
+									className="form-control" 
+									id="password" 
+									{...formik.getFieldProps('password')}
+								/>
+								{formik.touched.password && formik.errors.password && (
+									<div className="text-danger">{formik.errors.password}</div>
+								)}
+							</div>
+							<button type="submit" className="btn btn-primary">Submit</button>
+						</form>
+					
+				)}
+			</Formik>
+
+			<p>Not a memeber, please <Link to="/register">join</Link>!</p>
+		</div>
 		)
 	}
 
